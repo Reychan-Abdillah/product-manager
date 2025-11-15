@@ -1,0 +1,53 @@
+<!-- Sidebar -->
+<div
+  class="w-1/6 h-screen p-10 px-5 flex flex-col items-center rounded-e-xl bg-white"
+>
+  <div
+    class="text-2xl font-bold mb-16 text-black flex items-center gap-1 w-full"
+  >
+    <img
+      src="/assets/Evernote elephant lo.png"
+      alt="Logo"
+      class="w-10 h-10 object-contain"
+    />
+    Business
+  </div>
+
+  <div class="flex flex-col space-y-8 font-medium w-full">
+    <a
+      href="/dashboard"
+      class="flex items-center gap-3 py-2 px-3 w-full rounded-xl
+      <%= activePage === 'dashboard' ? 'bluecss' : 'hover:bg-gray-200' %>"
+    >
+      <ion-icon name="grid-outline" class="text-xl"></ion-icon>
+      <span>Dashboard</span>
+    </a>
+
+  <a
+  href="/product"
+  class="flex items-center gap-3 py-2 px-3 w-full rounded-xl
+  <%= activePage === 'product' ? 'bluecss' : 'hover:bg-gray-200' %>"
+>
+  <ion-icon name="bag-outline" class="text-xl"></ion-icon>
+  <span>Product</span>
+</a>
+
+
+    <a
+      href=""
+      class="flex items-center gap-3 py-2 px-3 w-full rounded-xl
+      <%= activePage === 'message' ? 'bluecss' : 'hover:bg-gray-200' %>"
+    >
+      <ion-icon name="chatbubbles-outline" class="text-xl"></ion-icon>
+      <span>Message</span>
+    </a>
+    <a
+      href=""
+      class="flex items-center gap-3 py-2 px-3 w-full rounded-xl
+      <%= activePage === 'settings' ? 'bluecss' : 'hover:bg-gray-200' %>"
+    >
+      <ion-icon name="settings-outline" class="text-xl"></ion-icon>
+      <span>Setting</span>
+    </a>
+  </div>
+</div>

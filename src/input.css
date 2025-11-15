@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+a, button {
+  font-family: 'Poppins', sans-serif;
+}
+
+.bluecss {
+  background-color: #ffbe18;
+  color: #ffffff;
+  transition: 0.2s;
+}
+
+.orangecss {
+  transition: 0.2s;  
+  background-color: #ffbe18;
+}
+
+.orangecss:hover {
+  background-color: #e0a815;
+}
