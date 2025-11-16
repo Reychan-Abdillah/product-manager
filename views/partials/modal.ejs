@@ -1,0 +1,77 @@
+<div
+  id="tableModal"
+  class="fixed inset-0 bg-black/25  hidden flex items-center justify-center z-50"
+>
+  <div class="bg-white rounded-lg shadow-lg max-w-md w-full mx-4">
+    <div class="flex justify-between items-center p-4 border-b border-b-gray-400">
+      <h2 class="text-xl font-semibold">Add New Product</h2>
+    </div>
+    <div class="p-4">
+      <form id="addProductForm" action="/product" method="POST">
+        <div class="mb-4">
+          <label
+            for="productName"
+            class="block text-sm font-medium text-gray-700"
+            >Nama Produk</label
+          >
+          <input
+            type="text"
+            id="productName"
+            name="productName"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            for="productPrice"
+            class="block text-sm font-medium text-gray-700"
+            >Harga</label
+          >
+          <div class="relative">
+            <span
+              class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-700"
+              >Rp.</span
+            >
+            <input
+              type="text"
+              id="productPrice"
+              name="productPrice"
+              class="mt-1 block w-full pl-9 pr-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label
+            for="productStock"
+            class="block text-sm font-medium text-gray-700"
+            >Stok</label
+          >
+          <input
+            type="text"
+            id="productStock"
+            name="productStock"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+        <div class="flex justify-end">
+          <button
+            type="button"
+            id="closeModal"
+            class="mr-2 bg-gray-300 text-gray-700 px-4 py-2 rounded-xl hover:bg-gray-400"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="bg-[#ffbe18] text-white px-4 py-2 rounded-xl hover:bg-[#e6a814]"
+          >
+            Add Product
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

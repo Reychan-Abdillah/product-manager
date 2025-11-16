@@ -1,0 +1,42 @@
+<!-- Modal Edit Produk -->
+<div
+  id="editModal"
+  class="fixed inset-0 bg-black/25 hidden flex items-center justify-center z-50"
+>
+  <div class="bg-white rounded-xl shadow-lg max-w-md w-full mx-4 p-5">
+    <h2 class="text-lg font-semibold mb-4">Edit Produk</h2>
+    <form id="editForm">
+      <div class="mb-4">
+        <label for="editPrice" class="block text-sm font-medium text-gray-700">Harga</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-700">Rp.</span>
+          <input
+            type="text"
+            id="editPrice"
+            name="editPrice"
+            class="mt-1 block w-full pl-9 pr-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="editStock" class="block text-sm font-medium text-gray-700">Stok</label>
+        <input
+          type="text"
+          id="editStock"
+          name="editStock"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          required
+        />
+      </div>
+      <div class="flex justify-end gap-3">
+        <button type="button" id="cancelEdit" class="px-4 py-2 rounded-xl bg-gray-300 text-gray-700 hover:bg-gray-400">
+          Batal
+        </button>
+        <button type="submit" class="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600">
+          Simpan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

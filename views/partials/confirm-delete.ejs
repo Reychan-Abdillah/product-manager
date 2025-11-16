@@ -1,0 +1,26 @@
+<!-- Modal Konfirmasi Hapus -->
+<div
+  id="confirmModal"
+  class="fixed inset-0 bg-black/25 hidden flex items-center justify-center z-50"
+>
+  <div class="bg-white rounded-xl shadow-lg max-w-md w-full mx-4 p-5">
+    <h2 class="text-xl font-semibold mb-4">Konfirmasi Hapus</h2>
+    <p id="confirmMessage" class="mb-6 text-md text-gray-700">
+      Apakah Anda yakin ingin menghapus produk ini?
+    </p>
+    <div class="flex justify-end gap-3">
+      <button
+        id="cancelDelete"
+        class="px-4 py-2 rounded-xl bg-gray-300 text-gray-700 hover:bg-gray-400"
+      >
+        Batal
+      </button>
+      <button
+        id="confirmDelete"
+        class="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600"
+      >
+        Hapus
+      </button>
+    </div>
+  </div>
+</div>

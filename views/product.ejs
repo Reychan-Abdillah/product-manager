@@ -1,44 +1,46 @@
-<!-- Konten Kanan -->
 <div class="flex-1 p-4">
-  <!-- Header -->
-  <div class="w-full bg-white p-5 rounded-xl flex justify-between items-center">
-    <div class="text-xl font-medium">Product</div>
-
-    <div class="flex items-center gap-5">
-      <!-- Search -->
+  <div
+    class="w-full bg-white p-3 md:p-5 rounded-xl flex justify-between items-center"
+  >
+    <div class="text-lg md:text-xl font-medium">Product</div>
+    <div class="flex items-center gap-2 md:gap-5">
       <div
-        class="flex items-center bg-gray-200 px-4 w-60 py-2.5 rounded-2xl gap-2"
+        id="search-contain"
+        class="flex items-center bg-gray-200 p-2 w-12 overflow-hidden md:py-2.5 md:px-4 md:w-60 rounded-2xl md:gap-2 transform transition-all duration-300"
       >
-        <ion-icon name="search-outline" class="text-gray-500"></ion-icon>
+        <ion-icon
+          name="search-outline"
+          class="text-gray-500 shrink-0"
+        ></ion-icon>
         <input
-        id="searchInput"
+          id="searchInput"
           type="text"
-          placeholder="Search Product"
-          class="bg-transparent outline-none text-sm"
+          class="bg-transparent outline-none text-xs md:text-sm"
         />
       </div>
 
-      <!-- Add Button -->
       <button
         id="modalBtn"
-        class="py-2 px-4 font-medium rounded-xl orangecss cursor-pointer"
+        class="p-2 h-full flex flex-col md:flex-row md:py-2 md:px-4 text-xs md:text-base text-black/70 font-medium rounded-lg md:rounded-xl orangecss cursor-pointer"
       >
-        + Add Product
+        + Add
+        <span class="hidden md:block"> Product</span>
       </button>
 
-      <!-- Filter -->
       <div
-        class="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-xl cursor-pointer hover:bg-gray-300 transition"
+        id="filterBtn"
+        class="relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10 bg-gray-200 rounded-lg md:rounded-xl cursor-pointer hover:bg-gray-300 transition"
       >
         <ion-icon
           name="filter-outline"
-          class="w-6 h-6 text-gray-700"
+          class="w-4 h-4 md:w-6 md:h-6 text-gray-700"
         ></ion-icon>
       </div>
     </div>
   </div>
-  <div class="overflow-x-auto pt-12">
-    <table id="productTable" class="min-w-full bg-white rounded-xl shadow-md">
+
+  <div class="overflow-x-auto pt-5 md:pt-12">
+    <table class="min-w-full bg-white rounded-xl shadow-md">
       <thead class="bg-gray-200 sticky top-0">
         <tr>
           <th class="text-left py-3 px-4 font-semibold text-sm rounded-tl-xl">
@@ -53,49 +55,40 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
+        <% if (dataProduk && dataProduk.length > 0) { %> <%
+        dataProduk.forEach((p, i) => { %>
         <tr class="hover:bg-gray-50">
-          <td class="py-2 px-4 text-sm">1</td>
-          <td class="py-2 px-4 text-sm">Apple MacBook Pro</td>
-          <td class="py-2 px-4 text-sm">$2500</td>
-          <td class="py-2 px-4 text-sm text-center">12</td>
+          <td class="py-2 px-4 text-sm"><%= i + 1 %></td>
+          <td class="py-2 px-4 text-sm"><%= p.name %></td>
+          <td class="py-2 px-4 text-sm">
+            Rp <%= Number(p.price).toLocaleString("id-ID") %>
+          </td>
+          <td class="py-2 px-4 text-sm text-center"><%= p.stock %></td>
+
           <td class="py-2 px-4 text-center flex justify-center gap-2">
-            <button class="text-blue-500 hover:text-blue-700">
+            <button
+              class="text-blue-500 hover:text-blue-700 editBtn"
+              data-id="<%= p._id %>"
+            >
               <ion-icon name="create-outline" class="text-lg"></ion-icon>
             </button>
-            <button class="text-red-500 hover:text-red-700">
+            <button
+              class="text-red-500 hover:text-red-700 deleteBtn"
+              data-id="<%= p._id %>"
+            >
               <ion-icon name="trash-outline" class="text-lg"></ion-icon>
             </button>
           </td>
         </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="py-2 px-4 text-sm">2</td>
-          <td class="py-2 px-4 text-sm">Samsung Galaxy S23</td>
-          <td class="py-2 px-4 text-sm">$999</td>
-          <td class="py-2 px-4 text-sm text-center">30</td>
-          <td class="py-2 px-4 text-center flex justify-center gap-2">
-            <button class="text-blue-500 hover:text-blue-700">
-              <ion-icon name="create-outline" class="text-lg"></ion-icon>
-            </button>
-            <button class="text-red-500 hover:text-red-700">
-              <ion-icon name="trash-outline" class="text-lg"></ion-icon>
-            </button>
-          </td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="py-2 px-4 text-sm">3</td>
-          <td class="py-2 px-4 text-sm">Sony WH-1000XM5</td>
-          <td class="py-2 px-4 text-sm">$399</td>
-          <td class="py-2 px-4 text-sm text-center">20</td>
-          <td class="py-2 px-4 text-center flex justify-center gap-2">
-            <button class="text-blue-500 hover:text-blue-700">
-              <ion-icon name="create-outline" class="text-lg"></ion-icon>
-            </button>
-            <button class="text-red-500 hover:text-red-700">
-              <ion-icon name="trash-outline" class="text-lg"></ion-icon>
-            </button>
-          </td>
-        </tr>
+        <% }) %> <% } %>
       </tbody>
     </table>
+    <p
+      id="no-result"
+      class="text-center text-md py-10"
+      style="display: none; color: red"
+    >
+      Tidak ada pencarian yang cocok!
+    </p>
   </div>
 </div>
