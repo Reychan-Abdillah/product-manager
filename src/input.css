@@ -26,3 +26,32 @@ a, button {
 .orangecss:hover {
   background-color: #e0a815;
 }
+
+
+
+/* Hanya untuk browser berbasis Webkit: Chrome, Edge, Safari */
+.scrollable-table::-webkit-scrollbar {
+  width: 6px; /* tebal scrollbar */
+  height: 6px; /* untuk horizontal scrollbar */
+}
+
+.scrollable-table::-webkit-scrollbar-track {
+  background: transparent; /* background track */
+}
+
+.scrollable-table::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* warna thumb */
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.scrollable-table::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4); /* hover */
+}
+
+/* Optional: smooth scroll */
+.scrollable-table {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0,0,0,0.2) transparent; /* Firefox */
+  scroll-behavior: smooth;
+}

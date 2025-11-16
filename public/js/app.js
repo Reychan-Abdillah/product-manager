@@ -232,21 +232,30 @@ function filterStock(type) {
 
   if (type === "highest") {
     sortedRows = rows.sort((a, b) => {
-      const stockA = Number(a.querySelector("td:nth-child(4)").textContent);
-      const stockB = Number(b.querySelector("td:nth-child(4)").textContent);
-      return stockB - stockA; // descending
+      const stockA = Number(a.querySelector("td:nth-child(5)").textContent);
+      const stockB = Number(b.querySelector("td:nth-child(5)").textContent);
+      return stockB - stockA;
     });
   } else if (type === "lowest") {
     sortedRows = rows.sort((a, b) => {
-      const stockA = Number(a.querySelector("td:nth-child(4)").textContent);
-      const stockB = Number(b.querySelector("td:nth-child(4)").textContent);
-      return stockA - stockB; // ascending
+      const stockA = Number(a.querySelector("td:nth-child(5)").textContent);
+      const stockB = Number(b.querySelector("td:nth-child(5)").textContent);
+      return stockA - stockB;
+    });
+  } else if (type === "date") {
+    sortedRows = rows.sort((a, b) => {
+      const dateA = new Date(
+        a.querySelector("td[data-tanggal]").dataset.tanggal
+      );
+      const dateB = new Date(
+        b.querySelector("td[data-tanggal]").dataset.tanggal
+      );
+      return dateB - dateA; // terbaru di atas
     });
   } else if (type === "reset") {
-    return window.location.reload(); // reset urutan
+    return window.location.reload();
   }
 
-  // Kosongkan tbody dan append row yang sudah di-sort
   tableBody.innerHTML = "";
   sortedRows.forEach((row) => tableBody.appendChild(row));
 }
