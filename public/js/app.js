@@ -65,11 +65,17 @@ attachFormatter(stockInput);
 const filterMenu = document.getElementById("filterMenu");
 const filterBtn = document.getElementById("filterBtn");
 
-filterBtn.addEventListener("click", () => {
+filterBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
   filterMenu.classList.toggle("hidden");
 });
 
-// =================== ADD PRODUCT ===================
+document.addEventListener("click", (e) => {
+  if (!filterMenu.contains(e.target) && !filterBtn.contains(e.target)) {
+    filterMenu.classList.add("hidden");
+  }
+});
+
 const addProductForm = document.getElementById("addProductForm");
 
 addProductForm.addEventListener("submit", async (e) => {
@@ -94,13 +100,11 @@ addProductForm.addEventListener("submit", async (e) => {
   });
 
   if (res.ok) {
-    modal.classList.add("hidden"); // tutup modal
-    location.reload(); // reload halaman
+    modal.classList.add("hidden");
+    location.reload();
   }
 });
 
-// =================== DELETE PRODUCT ===================
-// Modal konfirmasi Tailwind
 const confirmModal = document.getElementById("confirmModal");
 const cancelDelete = document.getElementById("cancelDelete");
 const confirmDeleteBtn = document.getElementById("confirmDelete");
@@ -111,13 +115,13 @@ const deleteBtns = document.querySelectorAll(".deleteBtn");
 deleteBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     currentDeleteBtn = btn;
-    confirmModal.classList.remove("hidden"); // tampilkan modal
+    confirmModal.classList.remove("hidden");
   });
 });
 
 cancelDelete.addEventListener("click", () => {
   currentDeleteBtn = null;
-  confirmModal.classList.add("hidden"); // sembunyikan modal
+  confirmModal.classList.add("hidden");
 });
 
 confirmDeleteBtn.addEventListener("click", async () => {
@@ -143,7 +147,6 @@ confirmDeleteBtn.addEventListener("click", async () => {
   }
 });
 
-// Edit Produk
 const editBtns = document.querySelectorAll(".editBtn");
 const editModal = document.getElementById("editModal");
 const cancelEdit = document.getElementById("cancelEdit");
@@ -153,7 +156,6 @@ const editStock = document.getElementById("editStock");
 
 let currentEditId = null;
 
-// Format input (misal: 10.000)
 function formatNumberInput(input) {
   input.addEventListener("input", () => {
     input.value = input.value
@@ -164,29 +166,42 @@ function formatNumberInput(input) {
 formatNumberInput(editPrice);
 formatNumberInput(editStock);
 
+// Fungsi format ribuan
+function formatRupiah(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+// Saat buka modal
 editBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     currentEditId = btn.getAttribute("data-id");
 
-    // Ambil harga dan stok dari tabel
     const row = btn.closest("tr");
-    const price = row
-      .querySelector("td:nth-child(3)")
-      .textContent.replace(/\D/g, "");
-    const stock = row.querySelector("td:nth-child(4)").textContent;
+    const priceText = row.querySelector("td:nth-child(4)").textContent;
+    const stockText = row.querySelector("td:nth-child(5)").textContent;
 
-    editPrice.value = price;
-    editStock.value = stock;
+    const priceNumber = Number(priceText.replace(/\D/g, ""));
+    const stockNumber = Number(stockText.replace(/\D/g, ""));
+
+    editPrice.value = formatRupiah(priceNumber); // assign dengan titik
+    editStock.value = formatRupiah(stockNumber); // assign dengan titik
 
     editModal.classList.remove("hidden");
   });
 });
 
-cancelEdit.addEventListener("click", () => {
-  currentEditId = null;
-  editModal.classList.add("hidden");
+// Format otomatis saat user mengetik
+editPrice.addEventListener("input", (e) => {
+  const value = e.target.value.replace(/\D/g, "");
+  e.target.value = formatRupiah(value);
 });
 
+editStock.addEventListener("input", (e) => {
+  const value = e.target.value.replace(/\D/g, "");
+  e.target.value = formatRupiah(value);
+});
+
+// Saat submit
 editForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!currentEditId) return;
@@ -203,14 +218,14 @@ editForm.addEventListener("submit", async (e) => {
 
     const data = await res.json();
     if (data.success) {
-      // Update row di tabel tanpa reload
       const row = document
         .querySelector(`.editBtn[data-id="${currentEditId}"]`)
         .closest("tr");
-      row.querySelector(
-        "td:nth-child(3)"
-      ).textContent = `Rp ${updatedPrice.toLocaleString("id-ID")}`;
-      row.querySelector("td:nth-child(4)").textContent = updatedStock;
+      row.querySelector("td:nth-child(4)").textContent = `Rp ${formatRupiah(
+        updatedPrice
+      )}`;
+      row.querySelector("td:nth-child(5)").textContent =
+        formatRupiah(updatedStock);
 
       editModal.classList.add("hidden");
     } else {
@@ -221,8 +236,6 @@ editForm.addEventListener("submit", async (e) => {
     alert("Terjadi error saat update produk!");
   }
 });
-
-
 
 function filterStock(type) {
   const tableBody = document.querySelector("tbody");
@@ -250,7 +263,7 @@ function filterStock(type) {
       const dateB = new Date(
         b.querySelector("td[data-tanggal]").dataset.tanggal
       );
-      return dateB - dateA; // terbaru di atas
+      return dateB - dateA;
     });
   } else if (type === "reset") {
     return window.location.reload();
